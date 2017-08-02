@@ -258,7 +258,7 @@ export default class SwipeCards extends Component {
 
   _forceUpSwipe() {
     this.cardAnimation = Animated.timing(this.state.pan, {
-      toValue: { x: 0, y: -500 },
+      toValue: { x: 0, y: -800 },
     }).start(status => {
       if (status.finished) this._advanceState();
       else this._resetState();
@@ -450,7 +450,7 @@ export default class SwipeCards extends Component {
     if (pan.x != 0 && pan.y == 0) {
       opacity = pan.x.interpolate({ inputRange: [-200, 0, 200], outputRange: [0.5, 1, 0.5] });
     } else if (pan.x == 0 && pan.y != 0) {
-      opacity = pan.y.interpolate({ inputRange: [-500, 0, 500], outputRange: [0.5, 1, 0.5] });
+      opacity = pan.y.interpolate({ inputRange: [-800, 0, 800], outputRange: [0.2, 1, 0.2] });
     }
 
     let scale = enter;
