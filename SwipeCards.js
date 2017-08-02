@@ -445,12 +445,12 @@ export default class SwipeCards extends Component {
     let [translateX, translateY] = [pan.x, pan.y];
 
     let rotate = pan.x.interpolate({ inputRange: [-200, 0, 200], outputRange: ["-30deg", "0deg", "30deg"] });
-    let opacity = 1;
 
-    if (pan.x != 0 && pan.y == 0) {
-      opacity = pan.x.interpolate({ inputRange: [-200, 0, 200], outputRange: [0.5, 1, 0.5] });
-    } else if (pan.x == 0 && pan.y != 0) {
-      opacity = pan.y.interpolate({ inputRange: [-800, 0, 800], outputRange: [0.2, 1, 0.2] });
+    let opacity = 1;
+    if (pan.x._value != 0 && pan.y._value == 0) {
+      opacity = pan.x.interpolate({ inputRange: [-500, 0, 500], outputRange: [0.5, 1, 0.5] });
+    } else if (pan.x._value == 0 && pan.y._value != 0) {
+      opacity = pan.y.interpolate({ inputRange: [-800, 0, 800], outputRange: [0.3, 1, 0.3] });
     }
 
     let scale = enter;
