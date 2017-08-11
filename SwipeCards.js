@@ -126,7 +126,7 @@ export default class SwipeCards extends Component {
     nopeText: "Nope!",
     maybeText: "Maybe!",
     yupText: "Yup!",
-    onClickHandler: () => { alert('tap') },
+    onClickHandler: () => {},
     onDragStart: () => {},
     onDragRelease: () => {},
     cardRemoved: (ix) => null,
@@ -156,6 +156,14 @@ export default class SwipeCards extends Component {
     this.cardAnimation = null;
 
     this._panResponder = PanResponder.create({
+      onStartShouldSetPanResponderCapture: (e, gestureState) => {
+        if (Math.abs(gestureState.dx) < 5) && (Math.abs(gestureState.dy) < 5) return false;
+
+        this.props.onDragStart()
+        this.lastX = gestureState.moveX;
+        this.lastY = gestureState.moveY;
+        return true;
+      },
       onMoveShouldSetPanResponderCapture: (e, gestureState) => {
         if (Math.abs(gestureState.dx) > 3 || Math.abs(gestureState.dy) > 3) {
           this.props.onDragStart();
