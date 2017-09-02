@@ -345,6 +345,8 @@ export default class SwipeCards extends Component {
         cards: [].concat(nextProps.cards),
         card: nextProps.cards[0]
       });
+
+      this._resetState()
     }
   }
 
