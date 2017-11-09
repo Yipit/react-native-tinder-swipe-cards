@@ -183,8 +183,7 @@ export default class SwipeCards extends Component {
         null, {
           dx: this.props.dragX ?
             this.state.pan.x :
-            0
-          },
+            0,
           dy: this.props.dragY ?
             this.state.pan.y :
             0
