@@ -102,6 +102,7 @@ export default class SwipeCards extends Component {
     onClickHandler: PropTypes.func,
     renderCard: PropTypes.func,
     cardRemoved: PropTypes.func,
+    dragX: PropTypes.bool,
     dragY: PropTypes.bool,
     smoothTransition: PropTypes.bool
   };
@@ -132,6 +133,7 @@ export default class SwipeCards extends Component {
     cardRemoved: (ix) => null,
     renderCard: (card) => null,
     style: styles.container,
+    dragX: true,
     dragY: true,
     smoothTransition: false
   };
