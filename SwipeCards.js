@@ -102,6 +102,7 @@ export default class SwipeCards extends Component {
     onClickHandler: PropTypes.func,
     renderCard: PropTypes.func,
     cardRemoved: PropTypes.func,
+    dragX: PropTypes.bool,
     dragY: PropTypes.bool,
     smoothTransition: PropTypes.bool
   };
@@ -132,6 +133,7 @@ export default class SwipeCards extends Component {
     cardRemoved: (ix) => null,
     renderCard: (card) => null,
     style: styles.container,
+    dragX: true,
     dragY: true,
     smoothTransition: false
   };
@@ -180,7 +182,14 @@ export default class SwipeCards extends Component {
       onPanResponderTerminationRequest: (evt, gestureState) => this.props.allowGestureTermination,
 
       onPanResponderMove: Animated.event([
-        null, { dx: this.state.pan.x, dy: this.props.dragY ? this.state.pan.y : 0 },
+        null, {
+          dx: this.props.dragX ?
+            this.state.pan.x :
+            0,
+          dy: this.props.dragY ?
+            this.state.pan.y :
+            0
+          },
       ]),
 
       onPanResponderRelease: (e, {vx, vy, dx, dy}) => {
