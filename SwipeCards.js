@@ -446,11 +446,16 @@ export default class SwipeCards extends Component {
           ]
         };
 
+        let panHandlers = {};
+        if (!this.props.disablePanHandlers) {
+          panHandlers = this._panResponder.panHandlers;
+        }
+
         return (
           <Animated.View
             key={card[this.props.cardKey]}
             style={[styles.card, animatedCardStyles]}
-            {!this.props.disablePanHandlers && ...this._panResponder.panHandlers}
+            {...panHandlers}
           >
             {this.props.renderCard(this.state.card)}
           </Animated.View>
@@ -484,11 +489,16 @@ export default class SwipeCards extends Component {
 
     let animatedCardStyles = { transform: [{ translateX }, { translateY }, { rotate }, { scale }], opacity };
 
+    let panHandlers = {};
+    if (!this.props.disablePanHandlers) {
+      panHandlers = this._panResponder.panHandlers;
+    }
+
     return (
       <Animated.View
         key={"top"}
         style={[styles.card, animatedCardStyles]}
-        {!this.props.disablePanHandlers && ...this._panResponder.panHandlers}
+        {...panHandlers}
       >
         {this.props.renderCard(this.state.card)}
       </Animated.View>
