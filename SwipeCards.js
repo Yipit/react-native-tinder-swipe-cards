@@ -104,7 +104,8 @@ export default class SwipeCards extends Component {
     cardRemoved: PropTypes.func,
     dragX: PropTypes.bool,
     dragY: PropTypes.bool,
-    smoothTransition: PropTypes.bool
+    smoothTransition: PropTypes.bool,
+    disablePanHandlers: PropTypes.bool
   };
 
   static defaultProps = {
@@ -135,7 +136,8 @@ export default class SwipeCards extends Component {
     style: styles.container,
     dragX: true,
     dragY: true,
-    smoothTransition: false
+    smoothTransition: false,
+    disablePanHandlers: false
   };
 
   constructor(props) {
@@ -444,9 +446,15 @@ export default class SwipeCards extends Component {
           ]
         };
 
-        return <Animated.View key={card[this.props.cardKey]} style={[styles.card, animatedCardStyles]} {... this._panResponder.panHandlers}>
-          {this.props.renderCard(this.state.card)}
-        </Animated.View>;
+        return (
+          <Animated.View
+            key={card[this.props.cardKey]}
+            style={[styles.card, animatedCardStyles]}
+            {this.props.disablePanHandlers ? null : ...this._panResponder.panHandlers}
+          >
+            {this.props.renderCard(this.state.card)}
+          </Animated.View>
+        )
       }
 
       return <Animated.View key={card[this.props.cardKey]} style={style}>{this.props.renderCard(card)}</Animated.View>;
@@ -476,9 +484,15 @@ export default class SwipeCards extends Component {
 
     let animatedCardStyles = { transform: [{ translateX }, { translateY }, { rotate }, { scale }], opacity };
 
-    return <Animated.View key={"top"} style={[styles.card, animatedCardStyles]} {... this._panResponder.panHandlers}>
-      {this.props.renderCard(this.state.card)}
-    </Animated.View>;
+    return (
+      <Animated.View
+        key={"top"}
+        style={[styles.card, animatedCardStyles]}
+        {this.props.disablePanHandlers ? null : ...this._panResponder.panHandlers}
+      >
+        {this.props.renderCard(this.state.card)}
+      </Animated.View>
+    )
   }
 
   renderNope() {
